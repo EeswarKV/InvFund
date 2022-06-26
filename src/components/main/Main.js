@@ -55,6 +55,27 @@ export default function Main(props) {
    
         return (
             <div className="main">
+                <style>
+                    {`
+                  @media only screen and (min-device-width: 340px) and (max-device-width: 768px) {
+                    table {
+                      width: 100%;
+                    }
+                    input{
+                      width: 70%;
+                    }
+                  }
+                  
+                  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+                    table {
+                      width: 70%;
+                    }
+                    input{
+                      width: 10%;
+                    }
+                  }
+                `}
+                </style>
                 <form onSubmit={handleSubmit}>
                     <div className="price-input">
                         <span>Stock Symbol: </span>
