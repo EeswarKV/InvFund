@@ -138,7 +138,7 @@ export default function Main(props) {
                     <th>ROE</th>
                     {
                         incomeStatement?.map((value, key) => {
-                            if(false){
+                            if(isNaN(key+1)){
                                 return (<td>{((value?.netIncome?.raw / (balanceSheet[key]?.totalStockholderEquity?.raw + balanceSheet[key+1]?.totalStockholderEquity?.raw)/2) * 100).toFixed(2)}</td>) 
                             }
                             return (
@@ -147,27 +147,7 @@ export default function Main(props) {
                         })
                     }
                 </tr>
-
-              {/* {
-                incomeStatement?.map((value, key) => {
-                  return (
-                    <tr key={key}>
-                        <th key={key}>{keyParams[key]}</th>
-                        <td>{((value?.netIncome?.raw / value?.totalRevenue?.raw) * 100).toFixed(2)}%</td>
-                        <td>{((value?.totalRevenue?.raw / balanceSheet[key]?.totalAssets?.raw)).toFixed(2)}</td>
-                        <td>{((balanceSheet[key]?.totalAssets?.raw / balanceSheet[key]?.totalStockholderEquity?.raw)).toFixed(2)}</td>
-                        {isNaN(balanceSheet[key+1]) && <td>{((value?.netIncome?.raw / (balanceSheet[key]?.totalStockholderEquity?.raw + balanceSheet[key+1]?.totalStockholderEquity?.raw)/2) * 100).toFixed(2)}</td>}
-                    </tr>
-                  )
-                  })
-                } */}
           </table>}
-                
-                {/* <p>Margin {parseFloat((netProfit / revenue) * 100).toFixed(2)}</p>
-                <p>Asset Turnover {parseFloat(revenue / assets).toFixed(2)}</p>
-                <p> Levarage {parseFloat(assets / equity).toFixed(2)}</p>
-                <p>ROE {parseFloat(netProfit / equity).toFixed(2)}</p>
-     */}
             </div>
         );
    
