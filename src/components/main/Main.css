@@ -42,7 +42,7 @@ table {
   border: 2px solid black;
   }
 
-  @media (min-width: 390px){
+@media only screen and (min-device-width: 390px) and (max-device-width: 768px) {
   table {
     width: 100%;
   }
@@ -51,7 +51,7 @@ table {
   }
 }
 
-@media (min-width: 720px){
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   table {
     width: 70%;
   }
