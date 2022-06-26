@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Main.css";
-const axios = require("axios");
+import axios from 'axios';
 
 export default function Main(props) {
     let obj ={};
