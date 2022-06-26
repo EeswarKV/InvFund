@@ -8,7 +8,7 @@
 }
 
 input{
-  width: 5%;
+  width: 20%;
   height: 30px;
   border-radius: 4px;
 }
@@ -25,7 +25,7 @@ span{
 p, span{color: black;}
 
 table {
-  width: 800px;
+  width:  800px;
   height: 200px;
   border-collapse: collapse;
   margin: 0 auto;
@@ -41,3 +41,21 @@ table {
   text-align: center;
   border: 2px solid black;
   }
+
+  @media (min-width: 390px){
+  table {
+    width: 100%;
+  }
+  input{
+    width: 70%;
+  }
+}
+
+@media (min-width: 720px){
+  table {
+    width: 70%;
+  }
+  input{
+    width: 10%;
+  }
+}
