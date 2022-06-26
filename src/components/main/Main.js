@@ -10,7 +10,6 @@ export default function Main(props) {
     const [loading, setLoading] = useState(true);
     const keyParams = ["Margin", "Asset turnover", "Leverage", "Return on equity"]
     const options = (statement) => {
-        
         return {
         method: 'GET',
         url: `https://yfapi.net/v11/finance/quoteSummary/${symbolName+'.NS'}?lang=en&region=IN&modules=${statement}`,
