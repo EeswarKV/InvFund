@@ -7,8 +7,17 @@ export default function Main(props) {
     const [symbolName, setSymbolName] = useState('');
     const [incomeStatement, setIncomeStatement] = useState([]);
     const [balanceSheet, setBalanceSheet] = useState([]);
+    const [financialData, setFinancialData] = useState([]);
+    const [cashflowStatement, setCashflowStatement] = useState([]);
     const [loading, setLoading] = useState(true);
     const keyParams = ["Margin", "Asset turnover", "Leverage", "Return on equity"]
+    const overViewText = [
+        "For every 1 rupee of sale, how much profit stakeholder is going to recieve", 
+        "For every one rupee of asset , how much sale is happening", 
+        "Lesser the Debts, good the value is.", 
+        "Return on equity",
+        "Earnings before Interest, Tax, Depreciation and, Amortization"
+    ];
     const options = (statement) => {
         return {
         method: 'GET',
@@ -45,11 +54,36 @@ export default function Main(props) {
         setLoading(false);
       }
 
+      const fetchFinancialData = async () =>{
+        setLoading(true);
+        try {
+          const {data: response} = await axios.request(options('financialData'));
+          console.log("fetchFinancialData", response);
+          setFinancialData(response?.quoteSummary?.result[0]?.financialData);
+        } catch (error) {
+          console.error(error.message);
+        }
+        setLoading(false);
+      }
+
+      const fetchCashflowData = async () =>{
+        setLoading(true);
+        try {
+          const {data: response} = await axios.request(options('cashflowStatementHistory'));
+          console.log("fetchCashflowData", response);
+          setCashflowStatement(response?.quoteSummary?.result[0]?.cashflowStatementHistory?.cashflowStatements);
+        } catch (error) {
+          console.error(error.message);
+        }
+        setLoading(false);
+      }
+
     function handleSubmit(e) {
         e.preventDefault();
         fetchIncomeData();
         fetchBalanceSheetData();
-        console.log('You clicked submit.');
+        fetchFinancialData();
+        fetchCashflowData();
     }
    
         return (
@@ -77,11 +111,10 @@ export default function Main(props) {
                 </style>
                 <form onSubmit={handleSubmit}>
                     <div className="price-input">
-                        <span>Stock Symbol: </span>
                         <input
                             type="text"
                             value={symbolName}
-                            placeholder=""
+                            placeholder="Enter Stock Symbol"
                             onChange={e => setSymbolName(e.target.value)}
                         />
                     </div>
@@ -99,6 +132,7 @@ export default function Main(props) {
                         )
                     })
                 }
+                <th>Comments</th>
               </tr>
             </thead>
                 <tr>
@@ -110,6 +144,7 @@ export default function Main(props) {
                             )
                         })
                     }
+                    <td>{overViewText[0]}</td>
                 </tr>
 
                 <tr>
@@ -121,10 +156,11 @@ export default function Main(props) {
                             )
                         })
                     }
+                    <td>{overViewText[1]}</td>
                 </tr>
 
                 <tr>
-                    <th>Total Assets</th>
+                    <th>Financial Leverage</th>
                     {
                         incomeStatement?.map((value, key) => {
                             return (
@@ -132,6 +168,7 @@ export default function Main(props) {
                             )
                         })
                     }
+                    <td>{overViewText[2]}</td>
                 </tr>
 
                 <tr>
@@ -146,6 +183,20 @@ export default function Main(props) {
                             )
                         })
                     }
+                    <td>{overViewText[3]}</td>
+                </tr>
+
+                <tr>
+                    <th>EBITDA margin</th>
+                    {
+                        incomeStatement?.map((value, key) => {
+                            return (
+                                <td>{(((( value?.ebit?.raw + cashflowStatement[key]?.depreciation?.raw) / value?.totalRevenue?.raw)/2) * 100).toFixed(2)}%</td>
+                                // <td>{value?.ebit?.raw + cashflowStatement[key]?.depreciation?.raw}</td>
+                            )
+                        })
+                    }
+                    <td>{overViewText[4]}</td>
                 </tr>
           </table>}
             </div>

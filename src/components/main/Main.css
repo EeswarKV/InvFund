@@ -30,6 +30,7 @@ table {
   border-collapse: collapse;
   margin: 0 auto;
   margin-top: 10px;
+  margin-bottom: 30px;
   }
   
   th {
@@ -42,4 +43,7 @@ table {
   border: 2px solid black;
   }
 
+  td:last-child {
+    width: 30%;
+  }
 
