@@ -184,8 +184,7 @@ export default function Main(props) {
                   <th>Asset turnover</th>
                   {
                       incomeStatement?.map((value, key) => {
-                        let val = key+1;
-                        if(incomeStatement[val]){
+                        if(incomeStatement[key+1]){
                           return (<td>{((value?.totalRevenue?.raw / ((balanceSheet[key]?.totalAssets?.raw+balanceSheet[key+1]?.totalAssets?.raw)/2))).toFixed(2)}</td>)
                       }
                           else return (
@@ -200,7 +199,10 @@ export default function Main(props) {
                   <th>Financial Leverage</th>
                   {
                       incomeStatement?.map((value, key) => {
-
+                        // let val = ((((balanceSheet[key]?.totalAssets?.raw+ balanceSheet[key+1]?.totalAssets?.raw)/2) / ((balanceSheet[key]?.totalStockholderEquity?.raw+balanceSheet[key+1]?.totalStockholderEquity?.raw)/2))).toFixed(2);
+                        // if(val==='NaN'){
+                        //   return (<td>-</td>)
+                        // }
                         if(incomeStatement[key+1]){
                           return (<td>{((((balanceSheet[key]?.totalAssets?.raw+ balanceSheet[key+1]?.totalAssets?.raw)/2) / ((balanceSheet[key]?.totalStockholderEquity?.raw+balanceSheet[key+1]?.totalStockholderEquity?.raw)/2))).toFixed(2)}</td>)
                       }
@@ -216,8 +218,11 @@ export default function Main(props) {
                   <th>ROE</th>
                   {
                       incomeStatement?.map((value, key) => {
-                        let val = key+1;
-                          if(incomeStatement[val]){
+                        // let val = ((value?.netIncome?.raw / ((balanceSheet[key]?.totalStockholderEquity?.raw + balanceSheet[key+1]?.totalStockholderEquity?.raw)/2)) * 100).toFixed(2);
+                        // if(val==='NaN'){
+                        //   return (<td>-</td>)
+                        // }
+                          if(incomeStatement[key+1]){
                               return (<td>{((value?.netIncome?.raw / ((balanceSheet[key]?.totalStockholderEquity?.raw + balanceSheet[key+1]?.totalStockholderEquity?.raw)/2)) * 100).toFixed(2)} %</td>) 
                           }
                           else return (
@@ -232,8 +237,11 @@ export default function Main(props) {
                   <th>ROCE</th>
                   {
                       incomeStatement?.map((value, key) => {
-                        let val = key+1;
-                          return (
+                        let val = ((value?.ebit?.raw/(balanceSheet[key]?.totalStockholderEquity?.raw + balanceSheet[key]?.longTermDebt?.raw))*100).toFixed(2);
+                        if(val==='NaN'){
+                          return (<td>-</td>)
+                        }
+                          else return (
                               <td>{((value?.ebit?.raw/(balanceSheet[key]?.totalStockholderEquity?.raw + balanceSheet[key]?.longTermDebt?.raw))*100).toFixed(2)}%</td>
                               // <td>{((value?.ebit?.raw/(balanceSheet[key]?.totalAssets?.raw - balanceSheet[key]?.totalCurrentLiabilities?.raw))*100).toFixed(2)}%</td>
                           )
@@ -246,6 +254,10 @@ export default function Main(props) {
                   <th>EBITDA margin</th>
                   {
                       incomeStatement?.map((value, key) => {
+                        let val = (((( value?.ebit?.raw + cashflowStatement[key]?.depreciation?.raw) / value?.totalRevenue?.raw)) * 100).toFixed(2);
+                        if(val==='NaN'){
+                          return (<td>-</td>)
+                        }
                           return (
                               <td>{(((( value?.ebit?.raw + cashflowStatement[key]?.depreciation?.raw) / value?.totalRevenue?.raw)) * 100).toFixed(2)}%</td>
                           )
