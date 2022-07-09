@@ -25,25 +25,63 @@ span{
 p, span{color: black;}
 
 table {
-  width:  800px;
+  width: 70%;
   height: 200px;
   border-collapse: collapse;
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 30px;
+  box-shadow: 1.5px 1.5px 1.5px orangered;
   }
   
   th {
-  border-bottom: 1px solid black;
-  border: 2px solid black;
+  border-bottom: 1px solid orangered;
+  border: 1px solid orangered;
   }
   
   td {
   text-align: center;
-  border: 2px solid black;
+  border: 1px solid orangered;
   }
 
   td:last-child {
     width: 30%;
   }
 
+  .compdesc{
+    margin-right: 33%;
+  }
+
+
+  .para{
+    width: 83%;
+    font-style: oblique;
+  }
+
+  .sector{
+    margin-right: 32%;
+  }
+
+  .summary{
+    text-align: left;
+    margin-left: 15%;
+  }
+
+  h4{
+    font-weight: 400;
+  }
+
+  .sector-name{
+    margin-top: 4px;
+  }
+  
+  @media only screen and (min-device-width: 340px) and (max-device-width: 768px) {
+    .summary{
+      text-align: left;
+      margin-left: 1%;
+    }
+    .para{
+      width: 100%;
+    }
+
+  }
